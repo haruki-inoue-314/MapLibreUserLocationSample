@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F972C7442BCD601300E8B992 /* MapLibre in Frameworks */ = {isa = PBXBuildFile; productRef = F972C7432BCD601300E8B992 /* MapLibre */; };
 		F9E609432BCC119C002496E7 /* MapLibreUserLocationSampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E609422BCC119C002496E7 /* MapLibreUserLocationSampleApp.swift */; };
-		F9E609452BCC119C002496E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E609442BCC119C002496E7 /* ContentView.swift */; };
+		F9E609452BCC119C002496E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E609442BCC119C002496E7 /* MainView.swift */; };
 		F9E609472BCC119F002496E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9E609462BCC119F002496E7 /* Assets.xcassets */; };
 		F9E6094B2BCC119F002496E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9E6094A2BCC119F002496E7 /* Preview Assets.xcassets */; };
 		F9E609552BCC119F002496E7 /* MapLibreUserLocationSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E609542BCC119F002496E7 /* MapLibreUserLocationSampleTests.swift */; };
 		F9E6095F2BCC119F002496E7 /* MapLibreUserLocationSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E6095E2BCC119F002496E7 /* MapLibreUserLocationSampleUITests.swift */; };
 		F9E609612BCC119F002496E7 /* MapLibreUserLocationSampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E609602BCC119F002496E7 /* MapLibreUserLocationSampleUITestsLaunchTests.swift */; };
+		F9E609762BCC16C7002496E7 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E609752BCC16C7002496E7 /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +38,7 @@
 /* Begin PBXFileReference section */
 		F9E6093F2BCC119C002496E7 /* MapLibreUserLocationSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapLibreUserLocationSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E609422BCC119C002496E7 /* MapLibreUserLocationSampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLibreUserLocationSampleApp.swift; sourceTree = "<group>"; };
-		F9E609442BCC119C002496E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F9E609442BCC119C002496E7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F9E609462BCC119F002496E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9E609482BCC119F002496E7 /* MapLibreUserLocationSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MapLibreUserLocationSample.entitlements; sourceTree = "<group>"; };
 		F9E6094A2BCC119F002496E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -45,6 +47,8 @@
 		F9E6095A2BCC119F002496E7 /* MapLibreUserLocationSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapLibreUserLocationSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E6095E2BCC119F002496E7 /* MapLibreUserLocationSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLibreUserLocationSampleUITests.swift; sourceTree = "<group>"; };
 		F9E609602BCC119F002496E7 /* MapLibreUserLocationSampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLibreUserLocationSampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F9E609702BCC13B6002496E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F9E609752BCC16C7002496E7 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F972C7442BCD601300E8B992 /* MapLibre in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,8 +100,10 @@
 		F9E609412BCC119C002496E7 /* MapLibreUserLocationSample */ = {
 			isa = PBXGroup;
 			children = (
+				F9E609722BCC1665002496E7 /* Models */,
+				F9E609732BCC166A002496E7 /* Views */,
+				F9E609702BCC13B6002496E7 /* Info.plist */,
 				F9E609422BCC119C002496E7 /* MapLibreUserLocationSampleApp.swift */,
-				F9E609442BCC119C002496E7 /* ContentView.swift */,
 				F9E609462BCC119F002496E7 /* Assets.xcassets */,
 				F9E609482BCC119F002496E7 /* MapLibreUserLocationSample.entitlements */,
 				F9E609492BCC119F002496E7 /* Preview Content */,
@@ -129,6 +136,30 @@
 			path = MapLibreUserLocationSampleUITests;
 			sourceTree = "<group>";
 		};
+		F9E609722BCC1665002496E7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F9E609732BCC166A002496E7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F9E609742BCC16B5002496E7 /* Main */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F9E609742BCC16B5002496E7 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				F9E609442BCC119C002496E7 /* MainView.swift */,
+				F9E609752BCC16C7002496E7 /* MapView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -145,6 +176,9 @@
 			dependencies = (
 			);
 			name = MapLibreUserLocationSample;
+			packageProductDependencies = (
+				F972C7432BCD601300E8B992 /* MapLibre */,
+			);
 			productName = MapLibreUserLocationSample;
 			productReference = F9E6093F2BCC119C002496E7 /* MapLibreUserLocationSample.app */;
 			productType = "com.apple.product-type.application";
@@ -163,6 +197,8 @@
 				F9E609522BCC119F002496E7 /* PBXTargetDependency */,
 			);
 			name = MapLibreUserLocationSampleTests;
+			packageProductDependencies = (
+			);
 			productName = MapLibreUserLocationSampleTests;
 			productReference = F9E609502BCC119F002496E7 /* MapLibreUserLocationSampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -217,6 +253,9 @@
 				Base,
 			);
 			mainGroup = F9E609362BCC119C002496E7;
+			packageReferences = (
+				F972C7422BCD5B4200E8B992 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */,
+			);
 			productRefGroup = F9E609402BCC119C002496E7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -259,7 +298,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9E609452BCC119C002496E7 /* ContentView.swift in Sources */,
+				F9E609452BCC119C002496E7 /* MainView.swift in Sources */,
+				F9E609762BCC16C7002496E7 /* MapView.swift in Sources */,
 				F9E609432BCC119C002496E7 /* MapLibreUserLocationSampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,6 +464,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MapLibreUserLocationSample/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -462,6 +503,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MapLibreUserLocationSample/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -617,6 +659,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F972C7422BCD5B4200E8B992 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maplibre/maplibre-gl-native-distribution";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.3.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F972C7432BCD601300E8B992 /* MapLibre */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F972C7422BCD5B4200E8B992 /* XCRemoteSwiftPackageReference "maplibre-gl-native-distribution" */;
+			productName = MapLibre;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F9E609372BCC119C002496E7 /* Project object */;
 }
