@@ -9,7 +9,7 @@ struct MapView: UIViewRepresentable {
     let mapTilerKey = getMapTilerKey()
 
     // スタイルのURLを定義
-    let styleURL = URL(string: "https://api.maptiler.com/maps/streets-v2/style.json?key=\(mapTilerKey)")
+    let styleURL = URL(string: "https://api.maptiler.com/maps/jp-mierune-dark/style.json?key=\(mapTilerKey)")
 
     // Viewを定義
     let mapView = MLNMapView(frame: .zero, styleURL: styleURL)
