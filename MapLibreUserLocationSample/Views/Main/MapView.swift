@@ -21,6 +21,9 @@ struct MapView: UIViewRepresentable {
       animated: false
     )
 
+    // ユーザーの現在位置を表示
+    mapView.showsUserLocation = true
+
     // DelegateはCoordinatorを指定します
     mapView.delegate = context.coordinator
 
@@ -45,6 +48,27 @@ struct MapView: UIViewRepresentable {
 
     func mapViewDidFinishLoadingMap(_ mapView: MLNMapView) {
       // マップのローディングが終わったときの処理
+    }
+
+    /// 現在位置が変更されたときの処理
+    /// - Parameters:
+    ///   - mapView: MapLibreのMapView
+    ///   - userLocation: ユーザーの現在位置
+    func mapView(_ mapView: MLNMapView, didUpdate userLocation: MLNUserLocation?) {
+
+      // ユーザーの位置情報を取得
+      guard let location = userLocation?.location else {
+        return
+      }
+
+      let lat = location.coordinate.latitude
+      let lon = location.coordinate.longitude
+
+      // 地図の中心をユーザーの位置情報に移動
+      mapView.setCenter(
+        CLLocationCoordinate2D(latitude: lat, longitude: lon),
+        animated: false
+      )
     }
   }
 
