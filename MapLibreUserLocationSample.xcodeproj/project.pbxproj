@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		F972C7442BCD601300E8B992 /* MapLibre in Frameworks */ = {isa = PBXBuildFile; productRef = F972C7432BCD601300E8B992 /* MapLibre */; };
+		F9E1693E2BCEDED5002E1B29 /* GBFSStationInformationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E1693D2BCEDED5002E1B29 /* GBFSStationInformationClient.swift */; };
+		F9E169402BCEDEEA002E1B29 /* HTTPDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E1693F2BCEDEEA002E1B29 /* HTTPDataDownloader.swift */; };
+		F9E169442BCEE05C002E1B29 /* StationInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E169432BCEE05C002E1B29 /* StationInformation.swift */; };
+		F9E169462BCEE6A7002E1B29 /* GBFSStationInformationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E169452BCEE6A7002E1B29 /* GBFSStationInformationProvider.swift */; };
 		F9E609432BCC119C002496E7 /* MapLibreUserLocationSampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E609422BCC119C002496E7 /* MapLibreUserLocationSampleApp.swift */; };
 		F9E609452BCC119C002496E7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E609442BCC119C002496E7 /* MainView.swift */; };
 		F9E609472BCC119F002496E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9E609462BCC119F002496E7 /* Assets.xcassets */; };
@@ -36,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F9E1693D2BCEDED5002E1B29 /* GBFSStationInformationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBFSStationInformationClient.swift; sourceTree = "<group>"; };
+		F9E1693F2BCEDEEA002E1B29 /* HTTPDataDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPDataDownloader.swift; sourceTree = "<group>"; };
+		F9E169432BCEE05C002E1B29 /* StationInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationInformation.swift; sourceTree = "<group>"; };
+		F9E169452BCEE6A7002E1B29 /* GBFSStationInformationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBFSStationInformationProvider.swift; sourceTree = "<group>"; };
 		F9E6093F2BCC119C002496E7 /* MapLibreUserLocationSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapLibreUserLocationSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E609422BCC119C002496E7 /* MapLibreUserLocationSampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLibreUserLocationSampleApp.swift; sourceTree = "<group>"; };
 		F9E609442BCC119C002496E7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -139,6 +147,10 @@
 		F9E609722BCC1665002496E7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F9E1693F2BCEDEEA002E1B29 /* HTTPDataDownloader.swift */,
+				F9E169432BCEE05C002E1B29 /* StationInformation.swift */,
+				F9E1693D2BCEDED5002E1B29 /* GBFSStationInformationClient.swift */,
+				F9E169452BCEE6A7002E1B29 /* GBFSStationInformationProvider.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -298,6 +310,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9E169442BCEE05C002E1B29 /* StationInformation.swift in Sources */,
+				F9E1693E2BCEDED5002E1B29 /* GBFSStationInformationClient.swift in Sources */,
+				F9E169462BCEE6A7002E1B29 /* GBFSStationInformationProvider.swift in Sources */,
+				F9E169402BCEDEEA002E1B29 /* HTTPDataDownloader.swift in Sources */,
 				F9E609452BCC119C002496E7 /* MainView.swift in Sources */,
 				F9E609762BCC16C7002496E7 /* MapView.swift in Sources */,
 				F9E609432BCC119C002496E7 /* MapLibreUserLocationSampleApp.swift in Sources */,
