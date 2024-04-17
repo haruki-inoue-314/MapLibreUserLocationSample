@@ -4,7 +4,6 @@ import MapKit
 
 struct MapView: UIViewRepresentable {
 
-  
   @ObservedObject var stationInformationProvider: GBFSStationInformationProvider
   @ObservedObject var stationStatusProvider: GBFSStationStatusProvider
 
@@ -47,39 +46,7 @@ struct MapView: UIViewRepresentable {
       return
     }
 
-    let features: [MLNPointFeature] = stationInformationProvider.stations.compactMap({ information in
-      // 位置を取得
-      let coordinate = CLLocationCoordinate2D(latitude: information.lat, longitude: information.lon)
-      let center = uiView.centerCoordinate
-
-      // 距離を計測
-      let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-      let centerLocation = CLLocation(latitude: center.latitude, longitude: center.longitude)
-
-      let distance = location.distance(from: centerLocation)
-
-      // 距離が5km以上の場合は表示しない
-      if (distance > 5000) {
-        return nil
-      }
-
-      let feature = MLNPointFeature()
-      feature.coordinate = coordinate
-
-      let status = stationStatusProvider.stations.first(where: {$0.station_id == information.station_id})
-
-      guard let status = status else {
-        return nil
-      }
-
-      feature.attributes = [
-        "bike_available": status.num_bikes_available
-      ]
-
-      return feature
-    })
-
-    source.shape = MLNShapeCollectionFeature(shapes: features)
+    source.shape = MLNShapeCollectionFeature(shapes: createFeatures(uiView as MLNMapView))
   }
 
   func makeCoordinator() -> Coordinator {
@@ -125,40 +92,7 @@ struct MapView: UIViewRepresentable {
         return
       }
 
-      let features: [MLNPointFeature] = stationInformationProvider.stations.compactMap({ information in
-        // 位置を取得
-        let coordinate = CLLocationCoordinate2D(latitude: information.lat, longitude: information.lon)
-        let center = mapView.centerCoordinate
-
-        // 距離を計測
-        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        let centerLocation = CLLocation(latitude: center.latitude, longitude: center.longitude)
-
-        let distance = location.distance(from: centerLocation)
-
-        // 距離が10km以上の場合は表示しない
-        if (distance > 5000) {
-          return nil
-        }
-
-        let feature = MLNPointFeature()
-        feature.coordinate = coordinate
-
-        let status = stationStatusProvider.stations.first(where: {$0.station_id == information.station_id})
-
-
-        guard let status = status else {
-          return nil
-        }
-
-        feature.attributes = [
-          "bike_available": status.num_bikes_available
-        ]
-
-        return feature
-      })
-
-      let source = createStationSource(style, features: features);
+      let source = createStationSource(style, features: control.createFeatures(mapView));
 
       let circleLayer = createStationCircleLayer(source)
       let textLayer = createStationTextLayer(source)
@@ -232,6 +166,45 @@ struct MapView: UIViewRepresentable {
         animated: false
       )
     }
+  }
+
+  
+  /// 描画用のFeaturesを作成します
+  /// - Parameter mapView: MapView
+  /// - Returns: MLNPointFeature
+  func createFeatures(_ mapView: MLNMapView) -> [MLNPointFeature] {
+    return stationInformationProvider.stations.compactMap({ information in
+      // 位置を取得
+      let coordinate = CLLocationCoordinate2D(latitude: information.lat, longitude: information.lon)
+      let center = mapView.centerCoordinate
+
+      // 距離を計測
+      let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+      let centerLocation = CLLocation(latitude: center.latitude, longitude: center.longitude)
+
+      let distance = location.distance(from: centerLocation)
+
+      // 距離が10km以上の場合は表示しない
+      if (distance > 5000) {
+        return nil
+      }
+
+      let feature = MLNPointFeature()
+      feature.coordinate = coordinate
+
+      let status = stationStatusProvider.stations.first(where: {$0.station_id == information.station_id})
+
+
+      guard let status = status else {
+        return nil
+      }
+
+      feature.attributes = [
+        "bike_available": status.num_bikes_available
+      ]
+
+      return feature
+    })
   }
 
   /// MapTilerのキーを取得します
