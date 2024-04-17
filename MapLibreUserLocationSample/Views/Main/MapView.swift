@@ -4,8 +4,7 @@ import MapKit
 
 struct MapView: UIViewRepresentable {
 
-  @Binding var isShownErrorAlert: Bool
-  @Binding var alertMessage: String
+  
   @ObservedObject var stationInformationProvider: GBFSStationInformationProvider
   @ObservedObject var stationStatusProvider: GBFSStationStatusProvider
 
@@ -37,13 +36,54 @@ struct MapView: UIViewRepresentable {
 
   func updateUIView(_ uiView: UIViewType, context: Context) {
     /// Viewがアップデートされたときの処理
-    print("update")
+    guard
+      let style = uiView.style,
+      let source = style.source(withIdentifier: "bike-station-source") as? MLNShapeSource
+    else {
+      return
+    }
+
+    if (stationInformationProvider.stations.isEmpty || stationStatusProvider.stations.isEmpty) {
+      return
+    }
+
+    let features: [MLNPointFeature] = stationInformationProvider.stations.compactMap({ information in
+      // 位置を取得
+      let coordinate = CLLocationCoordinate2D(latitude: information.lat, longitude: information.lon)
+      let center = uiView.centerCoordinate
+
+      // 距離を計測
+      let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+      let centerLocation = CLLocation(latitude: center.latitude, longitude: center.longitude)
+
+      let distance = location.distance(from: centerLocation)
+
+      // 距離が5km以上の場合は表示しない
+      if (distance > 5000) {
+        return nil
+      }
+
+      let feature = MLNPointFeature()
+      feature.coordinate = coordinate
+
+      let status = stationStatusProvider.stations.first(where: {$0.station_id == information.station_id})
+
+      guard let status = status else {
+        return nil
+      }
+
+      feature.attributes = [
+        "bike_available": status.num_bikes_available
+      ]
+
+      return feature
+    })
+
+    source.shape = MLNShapeCollectionFeature(shapes: features)
   }
 
   func makeCoordinator() -> Coordinator {
     Coordinator(
-      isShownErrorAlert: $isShownErrorAlert,
-      alertMessage: $alertMessage,
       stationInformationProvider: stationInformationProvider,
       stationStatusProvider: stationStatusProvider,
       control: self
@@ -53,8 +93,6 @@ struct MapView: UIViewRepresentable {
   class Coordinator: NSObject, MLNMapViewDelegate {
 
     // MARK: - State
-    @Binding var isShownErrorAlert: Bool
-    @Binding var alertMessage: String
     @ObservedObject var stationInformationProvider: GBFSStationInformationProvider
     @ObservedObject var stationStatusProvider: GBFSStationStatusProvider
 
@@ -63,61 +101,62 @@ struct MapView: UIViewRepresentable {
 
     // MARK: - Initialize
     init(
-      isShownErrorAlert: Binding<Bool>,
-      alertMessage: Binding<String>,
       stationInformationProvider: GBFSStationInformationProvider,
       stationStatusProvider: GBFSStationStatusProvider,
       control: MapView
     ) {
-      _isShownErrorAlert = isShownErrorAlert
-      _alertMessage = alertMessage
       self.stationInformationProvider = stationInformationProvider
       self.stationStatusProvider = stationStatusProvider
       self.control = control
     }
-    
+
     /// マップのローディングが終わったときの処理
     /// - Parameter mapView: MapView
     func mapViewDidFinishLoadingMap(_ mapView: MLNMapView) {
-
-      // 自転車ポートの情報を取得
-      Task {
-        do {
-          try await stationInformationProvider.fetchStationInformation()
-          try await stationStatusProvider.fetchStationStatus()
-          drawStations(mapView)
-        } catch {
-          isShownErrorAlert = true
-          alertMessage = "データの取得に失敗しました"
-        }
-      }
+      print("mapViewDidFinishLoadingMap")
+      drawStations(mapView)
     }
-    
+
     /// 地図に自転車のポートを表示します
     /// - Parameter mapView: MapView
     func drawStations(_ mapView: MLNMapView) {
+
       guard let style = mapView.style else {
         return
       }
 
-      var features: [MLNPointFeature] = []
+      let features: [MLNPointFeature] = stationInformationProvider.stations.compactMap({ information in
+        // 位置を取得
+        let coordinate = CLLocationCoordinate2D(latitude: information.lat, longitude: information.lon)
+        let center = mapView.centerCoordinate
 
-      for information in stationInformationProvider.stations {
+        // 距離を計測
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        let centerLocation = CLLocation(latitude: center.latitude, longitude: center.longitude)
+
+        let distance = location.distance(from: centerLocation)
+
+        // 距離が10km以上の場合は表示しない
+        if (distance > 5000) {
+          return nil
+        }
+
         let feature = MLNPointFeature()
-        feature.coordinate = CLLocationCoordinate2D(latitude: information.lat, longitude: information.lon)
+        feature.coordinate = coordinate
 
         let status = stationStatusProvider.stations.first(where: {$0.station_id == information.station_id})
 
+
         guard let status = status else {
-          continue
+          return nil
         }
 
         feature.attributes = [
           "bike_available": status.num_bikes_available
         ]
 
-        features.append(feature)
-      }
+        return feature
+      })
 
       let source = createStationSource(style, features: features);
 
@@ -127,7 +166,7 @@ struct MapView: UIViewRepresentable {
       style.addLayer(circleLayer)
       style.addLayer(textLayer)
     }
-    
+
     /// 地図に表示する自転車ポートのソースを作成します
     /// - Parameters:
     ///   - style: MapViewのStyle
@@ -139,7 +178,7 @@ struct MapView: UIViewRepresentable {
 
       return source
     }
-    
+
     /// 地図に表示する円のレイヤー設定をします
     /// - Parameter source: 地図に表示するソース
     /// - Returns: レイヤー情報
@@ -161,7 +200,7 @@ struct MapView: UIViewRepresentable {
       )
       return circleLayer
     }
-    
+
     /// 地図に表示する残り台数のレイヤー設定をします
     /// - Parameter source: 地図に表示するソース
     /// - Returns: レイヤー情報
