@@ -61,6 +61,7 @@ struct MapView: UIViewRepresentable {
     // MARK: - Proerties
     var control: MapView
 
+    // MARK: - Initialize
     init(
       isShownErrorAlert: Binding<Bool>,
       alertMessage: Binding<String>,
@@ -74,9 +75,12 @@ struct MapView: UIViewRepresentable {
       self.stationStatusProvider = stationStatusProvider
       self.control = control
     }
-
+    
+    /// マップのローディングが終わったときの処理
+    /// - Parameter mapView: MapView
     func mapViewDidFinishLoadingMap(_ mapView: MLNMapView) {
-      // マップのローディングが終わったときの処理
+
+      // 自転車ポートの情報を取得
       Task {
         do {
           try await stationInformationProvider.fetchStationInformation()
@@ -88,7 +92,9 @@ struct MapView: UIViewRepresentable {
         }
       }
     }
-
+    
+    /// 地図に自転車のポートを表示します
+    /// - Parameter mapView: MapView
     func drawStations(_ mapView: MLNMapView) {
       guard let style = mapView.style else {
         return
@@ -121,16 +127,25 @@ struct MapView: UIViewRepresentable {
       style.addLayer(circleLayer)
       style.addLayer(textLayer)
     }
-
+    
+    /// 地図に表示する自転車ポートのソースを作成します
+    /// - Parameters:
+    ///   - style: MapViewのStyle
+    ///   - features: 自転車ポートの情報
+    /// - Returns: MapLibreのソース
     func createStationSource(_ style: MLNStyle, features: [MLNPointFeature]) -> MLNSource {
       let source = MLNShapeSource(identifier: "bike-station-source", features: features)
       style.addSource(source)
 
       return source
     }
-
+    
+    /// 地図に表示する円のレイヤー設定をします
+    /// - Parameter source: 地図に表示するソース
+    /// - Returns: レイヤー情報
     func createStationCircleLayer(_ source: MLNSource) -> MLNCircleStyleLayer {
 
+      // 台数によって円の色を変化させます
       let stops: [NSNumber: UIColor] = [
         0: .red,
         1: .yellow,
@@ -146,7 +161,10 @@ struct MapView: UIViewRepresentable {
       )
       return circleLayer
     }
-
+    
+    /// 地図に表示する残り台数のレイヤー設定をします
+    /// - Parameter source: 地図に表示するソース
+    /// - Returns: レイヤー情報
     func createStationTextLayer(_ source: MLNSource) -> MLNSymbolStyleLayer {
       let textLayer = MLNSymbolStyleLayer(identifier: "station-text-layer", source: source)
       textLayer.text = NSExpression(forKeyPath: "bike_available")
