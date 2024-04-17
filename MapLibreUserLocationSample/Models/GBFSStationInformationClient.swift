@@ -2,11 +2,11 @@ import Foundation
 
 class GBFSStationInformationClient {
   
-  var stations: [StationInformationData] {
+  var stations: [StationInformationStation] {
     get async throws {
       let data = try await downloader.httpData(from: feedURL)
       let information = try decoder.decode(StationInformation.self, from: data)
-      return information.stations
+      return information.data.stations
     }
   }
   

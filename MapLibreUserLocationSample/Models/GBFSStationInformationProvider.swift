@@ -2,7 +2,7 @@ import Foundation
 
 @MainActor
 class GBFSStationInformationProvider: ObservableObject {
-  @Published var stations: [StationInformationData] = []
+  @Published var stations: [StationInformationStation] = []
 
   let client: GBFSStationInformationClient
 

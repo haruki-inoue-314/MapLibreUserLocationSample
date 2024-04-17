@@ -2,12 +2,16 @@ import Foundation
 
 struct StationInformation: Codable {
   let ttl: Int
-  let stations: [StationInformationData]
+  let data: StationInformationData
   let version: String
   let last_updated: Int64
 }
 
 struct StationInformationData: Codable {
+  let stations: [StationInformationStation]
+}
+
+struct StationInformationStation: Codable {
   let lat: Double
   let lon: Double
   let name: String
