@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		F972C7442BCD601300E8B992 /* MapLibre in Frameworks */ = {isa = PBXBuildFile; productRef = F972C7432BCD601300E8B992 /* MapLibre */; };
+		F9C5667B2BCFEA14008613B9 /* StationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C5667A2BCFEA14008613B9 /* StationStatus.swift */; };
+		F9C5667D2BCFEC3E008613B9 /* GBFSStationStatusClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C5667C2BCFEC3E008613B9 /* GBFSStationStatusClient.swift */; };
+		F9C5667F2BCFEC91008613B9 /* GBFSStationStatusProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C5667E2BCFEC91008613B9 /* GBFSStationStatusProvider.swift */; };
 		F9E1693E2BCEDED5002E1B29 /* GBFSStationInformationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E1693D2BCEDED5002E1B29 /* GBFSStationInformationClient.swift */; };
 		F9E169402BCEDEEA002E1B29 /* HTTPDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E1693F2BCEDEEA002E1B29 /* HTTPDataDownloader.swift */; };
 		F9E169442BCEE05C002E1B29 /* StationInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E169432BCEE05C002E1B29 /* StationInformation.swift */; };
@@ -40,6 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F9C5667A2BCFEA14008613B9 /* StationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationStatus.swift; sourceTree = "<group>"; };
+		F9C5667C2BCFEC3E008613B9 /* GBFSStationStatusClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBFSStationStatusClient.swift; sourceTree = "<group>"; };
+		F9C5667E2BCFEC91008613B9 /* GBFSStationStatusProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBFSStationStatusProvider.swift; sourceTree = "<group>"; };
 		F9E1693D2BCEDED5002E1B29 /* GBFSStationInformationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBFSStationInformationClient.swift; sourceTree = "<group>"; };
 		F9E1693F2BCEDEEA002E1B29 /* HTTPDataDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPDataDownloader.swift; sourceTree = "<group>"; };
 		F9E169432BCEE05C002E1B29 /* StationInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationInformation.swift; sourceTree = "<group>"; };
@@ -149,8 +155,11 @@
 			children = (
 				F9E1693F2BCEDEEA002E1B29 /* HTTPDataDownloader.swift */,
 				F9E169432BCEE05C002E1B29 /* StationInformation.swift */,
+				F9C5667A2BCFEA14008613B9 /* StationStatus.swift */,
 				F9E1693D2BCEDED5002E1B29 /* GBFSStationInformationClient.swift */,
 				F9E169452BCEE6A7002E1B29 /* GBFSStationInformationProvider.swift */,
+				F9C5667C2BCFEC3E008613B9 /* GBFSStationStatusClient.swift */,
+				F9C5667E2BCFEC91008613B9 /* GBFSStationStatusProvider.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -311,12 +320,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9E169442BCEE05C002E1B29 /* StationInformation.swift in Sources */,
+				F9C5667F2BCFEC91008613B9 /* GBFSStationStatusProvider.swift in Sources */,
 				F9E1693E2BCEDED5002E1B29 /* GBFSStationInformationClient.swift in Sources */,
 				F9E169462BCEE6A7002E1B29 /* GBFSStationInformationProvider.swift in Sources */,
 				F9E169402BCEDEEA002E1B29 /* HTTPDataDownloader.swift in Sources */,
+				F9C5667B2BCFEA14008613B9 /* StationStatus.swift in Sources */,
 				F9E609452BCC119C002496E7 /* MainView.swift in Sources */,
 				F9E609762BCC16C7002496E7 /* MapView.swift in Sources */,
 				F9E609432BCC119C002496E7 /* MapLibreUserLocationSampleApp.swift in Sources */,
+				F9C5667D2BCFEC3E008613B9 /* GBFSStationStatusClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
