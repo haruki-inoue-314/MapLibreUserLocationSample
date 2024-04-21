@@ -32,9 +32,14 @@ struct MapView: UIViewRepresentable {
 
     return mapView
   }
-
+  
+  /// リアクティブなデータが更新されたときの処理
+  /// - Parameters:
+  ///   - uiView: UIViewの情報
+  ///   - context: コンテキスト
   func updateUIView(_ uiView: UIViewType, context: Context) {
-    /// Viewがアップデートされたときの処理
+
+    // ソースが定義されていない場合は終了
     guard
       let style = uiView.style,
       let source = style.source(withIdentifier: "bike-station-source") as? MLNShapeSource
@@ -42,10 +47,12 @@ struct MapView: UIViewRepresentable {
       return
     }
 
+    // どちらかのデータがない場合は終了
     if (stationInformationProvider.stations.isEmpty || stationStatusProvider.stations.isEmpty) {
       return
     }
 
+    // shape に 更新後のFeaturesを反映
     source.shape = MLNShapeCollectionFeature(shapes: createFeatures(uiView as MLNMapView))
   }
 
@@ -80,7 +87,6 @@ struct MapView: UIViewRepresentable {
     /// マップのローディングが終わったときの処理
     /// - Parameter mapView: MapView
     func mapViewDidFinishLoadingMap(_ mapView: MLNMapView) {
-      print("mapViewDidFinishLoadingMap")
       drawStations(mapView)
     }
 
@@ -92,11 +98,14 @@ struct MapView: UIViewRepresentable {
         return
       }
 
+      // ソースの作成
       let source = createStationSource(style, features: control.createFeatures(mapView));
 
+      // レイヤーの作成
       let circleLayer = createStationCircleLayer(source)
       let textLayer = createStationTextLayer(source)
 
+      // マップにレイヤーを追加
       style.addLayer(circleLayer)
       style.addLayer(textLayer)
     }
@@ -178,10 +187,11 @@ struct MapView: UIViewRepresentable {
       let coordinate = CLLocationCoordinate2D(latitude: information.lat, longitude: information.lon)
       let center = mapView.centerCoordinate
 
-      // 距離を計測
+      // CLLocationを定義
       let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
       let centerLocation = CLLocation(latitude: center.latitude, longitude: center.longitude)
 
+      // 距離を計測
       let distance = location.distance(from: centerLocation)
 
       // 距離が5km以上の場合は表示しない
@@ -189,16 +199,18 @@ struct MapView: UIViewRepresentable {
         return nil
       }
 
+      // Feature を定義
       let feature = MLNPointFeature()
       feature.coordinate = coordinate
 
+      // 対象のステータスを取得
       let status = stationStatusProvider.stations.first(where: {$0.station_id == information.station_id})
-
 
       guard let status = status else {
         return nil
       }
 
+      // featureのattributesに残り台数を格納
       feature.attributes = [
         "bike_available": status.num_bikes_available
       ]
