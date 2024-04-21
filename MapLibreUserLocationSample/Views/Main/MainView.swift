@@ -53,9 +53,7 @@ struct MainView: View {
     .task {
       do {
         try await stationInformationProvider.fetchStationInformation()
-        print("end information fetch")
         try await stationStatusProvider.fetchStationStatus()
-        print("end status fetch")
       } catch {
         isShownErrorAlert = true
       }
