@@ -122,8 +122,8 @@ struct MapView: UIViewRepresentable {
       let stops: [NSNumber: UIColor] = [
         0: .red,
         1: .yellow,
-        3: .yellow,
-        4: .green,
+        2: .yellow,
+        3: .green,
       ]
 
       let circleLayer = MLNCircleStyleLayer(identifier: "station-circle-layer", source: source)
@@ -184,7 +184,7 @@ struct MapView: UIViewRepresentable {
 
       let distance = location.distance(from: centerLocation)
 
-      // 距離が10km以上の場合は表示しない
+      // 距離が5km以上の場合は表示しない
       if (distance > 5000) {
         return nil
       }
